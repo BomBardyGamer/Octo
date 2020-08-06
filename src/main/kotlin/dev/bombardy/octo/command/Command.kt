@@ -7,36 +7,29 @@ import net.dv8tion.jda.api.entities.Message
  * The base Command class, extended by all commands registered by Octo.
  *
  * By default, all commands will be executed asynchronously using coroutines.
- * You can disable asynchronous execution by setting [isSynchronous] to true.
+ * You can disable asynchronous execution by setting the isSynchronous option
+ * to true.
  *
  * @author Callum Seabrook
  * @since 1.0
  */
 @Suppress("unused")
-abstract class Command(internal val names: List<String>,
-                       internal val optionalArgs: Boolean = false,
-                       internal val allowBots: Boolean = false,
-                       internal val isSynchronous: Boolean = false
+abstract class Command(
+        internal val name: String
 ) {
 
     /**
-     * The help message, outputted when there were no arguments provided, and arguments
-     * are not optional.
-     *
-     * Is of type [Message] to allow for embeds to be provided
+     * The options for this command
      */
-    open val helpMessage = MessageBuilder("Use the command properly and you wouldn't see this").build()
+    open val options = CommandOptions()
 
     /**
-     * The no bots message, outputted when a bot attempts to execute a command and
-     * bots are not allowed to execute this command.
-     *
-     * Is of type [Message] to allow for embeds to be provided.
+     * The messages for this command
      */
-    open val noBotsMessage = MessageBuilder("Sorry, bots can't execute commands!").build()
+    open val messages = CommandMessages()
 
     /**
-     * A list of sub commands for this command.
+     * The command's sub commands
      */
     open val subCommands = listOf<Command>()
 
@@ -45,8 +38,8 @@ abstract class Command(internal val names: List<String>,
      *
      * @param message the original message sent, [Message] provided to give author,
      *                channel, and message in one object.
-     * @param arguments the arguments given for the command, will be empty if [optionalArgs]
-     *                  is set to true and there are no arguments.
+     * @param arguments the arguments given for the command, will be empty if the optionalArgs
+     *                  option is set to true and there are no arguments.
      */
     abstract suspend fun execute(message: Message, arguments: List<String>)
 }

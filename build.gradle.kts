@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "dev.bombardy"
-version = "1.0.14sudo "
+version = "2.0"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
