@@ -20,7 +20,7 @@ dependencies {
 ```
 ```groovy
 repositories {
-    maven { url 'https://repo.prevarinite.com/repository/maven-releases' }
+    maven { url 'https://repo.prevarinite.com/repository/maven-public/' }
 }
 ```
 
@@ -35,7 +35,7 @@ repositories {
 ```xml
 <repository>
     <id>prevarinite</id>
-    <url>https://repo.prevarinite.com/repository/maven-releases</url>
+    <url>https://repo.prevarinite.com/repository/maven-public/</url>
 </repository>
 ```
 
