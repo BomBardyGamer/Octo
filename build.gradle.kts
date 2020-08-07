@@ -1,3 +1,21 @@
+/*
+ * Octo, the simple yet responsive JDA command framework with advanced capabilities
+ * Copyright (C) 2020  Callum Jay Seabrook
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.dokka.gradle.DokkaTask
 
@@ -92,6 +110,8 @@ publishing {
                         id.set("BomBardyGamer")
                         name.set("Callum Seabrook")
                         email.set("callum.seabrook@prevarinite.com")
+
+                        roles.set(listOf("Developer", "Maintainer"))
 
                         organization.set("Prevarinite")
                         organizationUrl.set("https://www.prevarinite.com/")
