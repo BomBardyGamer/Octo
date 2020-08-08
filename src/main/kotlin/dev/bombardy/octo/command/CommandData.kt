@@ -28,10 +28,10 @@ import net.dv8tion.jda.api.entities.Message
  * @since 2.0
  */
 data class CommandOptions(
-        internal val aliases: List<String> = emptyList(),
-        internal val optionalArgs: Boolean = false,
-        internal val allowBots: Boolean = false,
-        internal val isSynchronous: Boolean = false
+        val aliases: List<String> = emptyList(),
+        val optionalArgs: Boolean = false,
+        val allowBots: Boolean = false,
+        val isSynchronous: Boolean = false
 )
 
 /**
@@ -41,8 +41,8 @@ data class CommandOptions(
  * @since 2.0
  */
 data class CommandMessages(
-        internal val help: Message = getMessage("help"),
-        internal val noBots: Message = getMessage("noBots")
+        val help: Message = getMessage("help"),
+        val noBots: Message = getMessage("noBots")
 )
 
 private val MESSAGE_DEFAULTS = mapOf(

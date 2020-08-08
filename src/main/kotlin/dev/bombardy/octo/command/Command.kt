@@ -33,7 +33,7 @@ import net.dv8tion.jda.api.entities.Message
  */
 @Suppress("unused")
 abstract class Command(
-        internal val name: String
+        val name: String
 ) {
 
     /**
