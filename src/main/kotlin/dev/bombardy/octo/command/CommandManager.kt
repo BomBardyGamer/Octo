@@ -20,10 +20,12 @@ package dev.bombardy.octo.command
 
 import dev.bombardy.octo.OctoScope
 import kotlinx.coroutines.launch
+import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.entities.TextChannel
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
+import net.dv8tion.jda.api.sharding.ShardManager
 
 /**
  * The command manager, used for registering and executing commands.
@@ -32,7 +34,15 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
  * @since 1.0
  */
 @Suppress("unused", "MemberVisibilityCanBePrivate")
-abstract class CommandManager : ListenerAdapter() {
+abstract class CommandManager() : ListenerAdapter() {
+
+    constructor(shardManager: ShardManager) : this() {
+        shardManager.addEventListener(this)
+    }
+
+    constructor(jda: JDA) : this() {
+        jda.addEventListener(this)
+    }
 
     protected open val messageHandler = MessageHandler()
     protected open val commands = mutableListOf<Command>()
