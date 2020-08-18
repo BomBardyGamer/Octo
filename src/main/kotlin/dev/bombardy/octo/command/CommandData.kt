@@ -82,6 +82,9 @@ fun optionsOf(
         isSynchronous: Boolean = false
 ) = @Suppress("DEPRECATION") CommandOptions(aliases.toSet(), optionalArgs, allowBots, isSynchronous)
 
+fun defaultOptions()
+        = @Suppress("DEPRECATION") CommandOptions(emptySet(), optionalArgs = false, allowBots = false, isSynchronous = false)
+
 fun messagesOf(
         help: Message = getMessage("help"),
         noBots: Message = getMessage("noBots")

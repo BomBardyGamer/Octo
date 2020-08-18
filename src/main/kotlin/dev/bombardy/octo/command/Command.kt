@@ -37,7 +37,7 @@ abstract class Command(
     /**
      * The options for this command
      */
-    open val options = optionsOf()
+    open val options = defaultOptions()
 
     /**
      * The messages for this command
