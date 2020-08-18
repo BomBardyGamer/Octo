@@ -26,12 +26,11 @@ import net.dv8tion.jda.api.entities.Message
  * @author Callum Jay Seabrook
  * @since 2.0
  */
-@Deprecated(
+data class CommandOptions @Deprecated(
         "Do not instantiate this class directly anymore, use optionsOf",
         ReplaceWith("optionsOf(aliases, optionalArgs, allowBots, isSynchronous)", "dev.bombardy.octo.command.optionsOf"),
         DeprecationLevel.WARNING
-)
-data class CommandOptions internal constructor(
+) constructor(
         val aliases: Iterable<String>,
         val optionalArgs: Boolean,
         val allowBots: Boolean,
@@ -44,12 +43,11 @@ data class CommandOptions internal constructor(
  * @author Callum Jay Seabrook
  * @since 2.0
  */
-@Deprecated(
+data class CommandMessages @Deprecated(
         "Do not instantiate this class directly anymore, use messagesOf",
         ReplaceWith("messagesOf(help, noBots)", "dev.bombardy.octo.command.messagesOf"),
         DeprecationLevel.WARNING
-)
-data class CommandMessages internal constructor(
+) constructor(
         val help: Message,
         val noBots: Message
 )
