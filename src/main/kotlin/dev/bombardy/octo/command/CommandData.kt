@@ -23,25 +23,35 @@ import net.dv8tion.jda.api.entities.Message
 /**
  * Represents options for a command
  *
- * @author Callum Seabrook
+ * @author Callum Jay Seabrook
  * @since 2.0
  */
-data class CommandOptions(
-        val aliases: Iterable<String> = emptySet(),
-        val optionalArgs: Boolean = false,
-        val allowBots: Boolean = false,
-        val isSynchronous: Boolean = false
+@Deprecated(
+        "Do not instantiate this class directly anymore, use optionsOf",
+        ReplaceWith("optionsOf(aliases, optionalArgs, allowBots, isSynchronous)", "dev.bombardy.octo.command.optionsOf"),
+        DeprecationLevel.WARNING
+)
+data class CommandOptions internal constructor(
+        val aliases: Iterable<String>,
+        val optionalArgs: Boolean,
+        val allowBots: Boolean,
+        val isSynchronous: Boolean
 )
 
 /**
  * Represents messages that will be sent if a command is not used correctly
  *
- * @author Callum Seabrook
+ * @author Callum Jay Seabrook
  * @since 2.0
  */
-data class CommandMessages(
-        val help: Message = getMessage("help"),
-        val noBots: Message = getMessage("noBots")
+@Deprecated(
+        "Do not instantiate this class directly anymore, use messagesOf",
+        ReplaceWith("messagesOf(help, noBots)", "dev.bombardy.octo.command.messagesOf"),
+        DeprecationLevel.WARNING
+)
+data class CommandMessages internal constructor(
+        val help: Message,
+        val noBots: Message
 )
 
 private val MESSAGE_DEFAULTS = mapOf(
@@ -59,3 +69,15 @@ private fun getMessage(key: String) = MESSAGE_DEFAULTS.getValue(key)
  * @since 2.0
  */
 fun String.toMessage() = MessageBuilder(this).build()
+
+fun optionsOf(
+        aliases: Iterable<String> = emptySet(),
+        optionalArgs: Boolean = false,
+        allowBots: Boolean = false,
+        isSynchronous: Boolean = false
+) = @Suppress("DEPRECATION") CommandOptions(aliases, optionalArgs, allowBots, isSynchronous)
+
+fun messagesOf(
+        help: Message = getMessage("help"),
+        noBots: Message = getMessage("noBots")
+) = @Suppress("DEPRECATION") CommandMessages(help, noBots)

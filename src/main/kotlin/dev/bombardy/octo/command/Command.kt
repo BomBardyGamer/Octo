@@ -37,12 +37,12 @@ abstract class Command(
     /**
      * The options for this command
      */
-    open val options = CommandOptions()
+    open val options = optionsOf()
 
     /**
      * The messages for this command
      */
-    open val messages = CommandMessages()
+    open val messages = messagesOf()
 
     /**
      * The command's sub commands

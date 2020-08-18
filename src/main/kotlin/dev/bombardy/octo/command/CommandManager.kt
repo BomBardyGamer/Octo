@@ -38,7 +38,7 @@ import net.dv8tion.jda.api.sharding.ShardManager
  * @since 1.0
  * @see [dev.bombardy.octo.command.default.DefaultCommandManager]
  */
-@Suppress("unused", "MemberVisibilityCanBePrivate")
+@Suppress("unused", "MemberVisibilityCanBePrivate", "LeakingThis")
 abstract class CommandManager() : ListenerAdapter() {
 
     constructor(shardManager: ShardManager) : this() {
@@ -58,7 +58,7 @@ abstract class CommandManager() : ListenerAdapter() {
      *
      * @param command the command to register for execution.
      */
-    fun register(command: Command) {
+    open fun register(command: Command) {
         commands += command
     }
 
@@ -68,7 +68,7 @@ abstract class CommandManager() : ListenerAdapter() {
      *
      * @param commands the list of commands to register for execution.
      */
-    fun registerAll(commands: Iterable<Command>) = commands.forEach(this::register)
+    open fun registerAll(commands: Iterable<Command>) = commands.forEach(this::register)
 
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
         OctoScope.launch {
@@ -76,7 +76,7 @@ abstract class CommandManager() : ListenerAdapter() {
         }
     }
 
-    fun registerMessage(id: String, message: (Message) -> Unit) = messageHandler.register(id, message)
+    open fun registerMessage(id: String, message: (Message) -> Unit) = messageHandler.register(id, message)
 
     abstract suspend fun handle(channel: TextChannel, message: Message)
 }
