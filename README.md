@@ -44,7 +44,10 @@ repositories {
 The usage for Octo is quite simple, it just requires that all commands extend the abstract `Command` class, like this:
 
 ```kotlin
-class MyCommand : Command(names = listOf("mycommand", "command", "cmd")) {
+class MyCommand : Command(name = "mycommand") {
+
+    /** Optional override */
+    override val options = CommandOptions(aliases = listOf("command", "cmd"))
 
     override suspend fun execute(message: Message, arguments: List<String>) {
         message.channel.sendMessage("This is my command!").queue()
@@ -52,13 +55,34 @@ class MyCommand : Command(names = listOf("mycommand", "command", "cmd")) {
 }
 ```
 
-Then you can create a new instance of the `CommandManager` to register your commands for usage, like this:
+Then you can create a new instance of the `DefaultCommandManager` to register your commands using default
+command handling, like this:
 
 ```kotlin
 fun main() {
     val jda = JDABuilder.create(MY_GATEWAY_INTENTS, MY_BOT_TOKEN).build()
 
-    val commandManager = CommandManager(jda, globalPrefix = "!")
+    val commandManager = DefaultCommandManager(jda, prefix = "!")
+    commandManager.register(MyCommand())
+}
+```
+
+Also, you are now able to create your own implementation of the `CommandManager` if you require different
+functionality other than what the `DefaultCommandManager` provides (such as per-guild prefixes stored in
+a database)
+
+```kotlin
+class CustomCommandManager : CommandManager() {
+
+    override suspend fun handle(channel: TextChannel, message: Message) {
+        // handle commands here
+    }
+}
+
+fun main() {
+    val jda = JDABuilder.create(MY_GATEWAY_INTENTS, MY_BOT_TOKEN).build()
+
+    val commandManager = CustomCommandManager(jda)
     commandManager.register(MyCommand())
 }
 ```

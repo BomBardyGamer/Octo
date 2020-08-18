@@ -1,24 +1,22 @@
 /*
  * Octo, the simple yet responsive JDA command framework with advanced capabilities
- * Copyright (C) 2020  Callum Jay Seabrook
+ * Copyright (C) 2020 Callum Jay Seabrook
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package dev.bombardy.octo.command
 
-import net.dv8tion.jda.api.MessageBuilder
 import net.dv8tion.jda.api.entities.Message
 
 /**
@@ -49,7 +47,7 @@ abstract class Command(
     /**
      * The command's sub commands
      */
-    open val subCommands = listOf<Command>()
+    open val subCommands: Iterable<Command> = emptySet()
 
     /**
      * The method called to execute the command. This is where you put all of your command code.

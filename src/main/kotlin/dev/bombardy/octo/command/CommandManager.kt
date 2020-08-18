@@ -1,19 +1,18 @@
 /*
  * Octo, the simple yet responsive JDA command framework with advanced capabilities
- * Copyright (C) 2020  Callum Jay Seabrook
+ * Copyright (C) 2020 Callum Jay Seabrook
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package dev.bombardy.octo.command
@@ -28,10 +27,16 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.dv8tion.jda.api.sharding.ShardManager
 
 /**
- * The command manager, used for registering and executing commands.
+ * The base command manager, made abstract to allow for custom command handling
+ *
+ * To create your own command handler method, inherit from this class and override
+ * the [handle] method
+ *
+ * If you're looking for what this used to do, see the [dev.bombardy.octo.command.default.DefaultCommandManager]
  *
  * @author Callum Seabrook
  * @since 1.0
+ * @see [dev.bombardy.octo.command.default.DefaultCommandManager]
  */
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 abstract class CommandManager() : ListenerAdapter() {
@@ -63,7 +68,7 @@ abstract class CommandManager() : ListenerAdapter() {
      *
      * @param commands the list of commands to register for execution.
      */
-    fun registerAll(commands: List<Command>) = commands.forEach(this::register)
+    fun registerAll(commands: Iterable<Command>) = commands.forEach(this::register)
 
     override fun onGuildMessageReceived(event: GuildMessageReceivedEvent) {
         OctoScope.launch {
