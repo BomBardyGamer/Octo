@@ -61,7 +61,7 @@ class DefaultCommandManager(
                 foundCommand = true
 
                 val arguments = when (command.options.optionalArgs) {
-                    true -> iterator.asSequence().toList().takeIf { it.isNotEmpty() }
+                    false -> iterator.asSequence().toList().takeIf { it.isNotEmpty() }
                             ?: return@outer channel.sendMessage(command.messages.help).queue()
                     else -> iterator.asSequence().toList()
                 }
